@@ -25,8 +25,8 @@
                   <td>{{ $entry->id }}</td>
                   <td>{{ $entry->title }}</td>
                   <td>{{ $entry->created_at->diffForHumans() }}</td>
-                  <td><a href="">Edit</a></td>
-                  <td><a href="">Delete</a></td>
+                  <td><a href="{{ route('edit.post', $entry->id) }}">Edit</a></td>
+                  <td><a href="{{ route('deletepost', $entry->id) }}">Delete</a></td>
                 </tr>
              @endforeach
               </tbody>
