@@ -146,7 +146,7 @@ class AdminController extends Controller
         ->with('postgallery', $postgallery);
     }
 
-    public function updatePost(Request $request, Posts $posts, $id) {
+    public function updatePost(Request $request, $id) {
 
         $postUpdate = $post->find($id);
 
@@ -160,12 +160,12 @@ class AdminController extends Controller
         $post->title = $request->input('title');
         $post->sub_cat_id = $request->input('subcategory');
         $post->description = $request->input('description');
-        $post->temp_post_id = $request->input('post_id');
+        //$post->temp_post_id = $request->input('post_id');
 
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $location = public_path('uploads/cars/' . $filename);
+            $location = public_path('uploads/posts/' . $filename);
             
             $width = Image::make($image)->width();
                 $height = Image::make($image)->height();
@@ -177,30 +177,30 @@ class AdminController extends Controller
 
                 // resize image to new height but do not exceed original size
                 $image = Image::make($image)->heighten($newHeight, function ($constraint) {
-                $constraint->upsize();
+                    $constraint->upsize();
                 });
 
                 // resize image to new width but do not exceed original size
                 $image = Image::make($image)->widen($newWidth, function ($constraint) {
-                $constraint->upsize();
-            });
+                    $constraint->upsize();
+                });
 
          }
 
             Image::make($image)->save($location);
             
-            $oldFilename = $carUpdate->image;
-            $filepath = public_path(). '/uploads/cars/' . $oldFilename;
+            $oldFilename = $postUpdate->image;
+            $filepath = public_path(). '/uploads/posts/' . $oldFilename;
 
-            $carUpdate->image = $filename;
+            $postUpdate->image = $filename;
 
             \File::delete($filepath);
          }
 
-         $carUpdate->save();
+         $postUpdate->save();
 
 
-        return redirect()->route('viewcollections')->with('info', 'Car updated');
+        return redirect()->back();
     }
 
 

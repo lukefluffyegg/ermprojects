@@ -27,7 +27,7 @@ tinymce.init({
         <div class="col-md-12">
 
                 <div class="panel-body">
-                    <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="">
+                    <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="{{ route('post.entry') }}">
                         {{ csrf_field() }}
 
 

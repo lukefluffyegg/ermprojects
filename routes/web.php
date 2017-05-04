@@ -14,6 +14,7 @@ Route::get('deletepost/{id}', 'AdminController@PostDelete')->name('deletepost');
 
 // Admin Routes POST
 Route::post('post', 'AdminController@postEntry')->name('post.entry');
+Route::post('postedit/{id}', 'AdminController@editPost')->name('post.edit');
 Route::post('imagesupload', 'AdminController@galleryImageUpload')->name('imagesupload');
 
 

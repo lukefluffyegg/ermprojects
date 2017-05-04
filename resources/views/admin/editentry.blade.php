@@ -27,7 +27,7 @@ tinymce.init({
         <div class="col-md-12">
 
                 <div class="panel-body">
-                    <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="">
+                    <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="{{ route('post.edit', $post->id) }}">
                         {{ csrf_field() }}
 
 
@@ -92,7 +92,8 @@ tinymce.init({
             </div>
         </div>
 
-        <input type="hidden" name="post_id" value="">
+        <input type="hidden" name="post_id" value="{{ $post->id }}">
+
        
         <div class="form-group" >
             <div class="col-md-7 col-md-offset-4">
@@ -108,7 +109,7 @@ tinymce.init({
       <div class="col-md-7">
             <form action="{{ route('imagesupload') }}" class="dropzone" id="addImages">
                 {{ csrf_field() }}
-                <input type="hidden" name="temp_post_id" value="{{ $post->id }}">
+                <input type="hidden" name="post_id" value="{{ $post->id }}">
             </form>
       </div>
     </div>
