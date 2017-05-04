@@ -8,7 +8,9 @@
 <title>{{ config('app.name', 'Laravel') }}</title>
 
 <!-- Styles -->
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 
 <!-- Scripts -->
 <script>
@@ -16,3 +18,5 @@
         'csrfToken' => csrf_token(),
     ]) !!};
 </script>
+ <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+ <script src="https://use.fontawesome.com/33ea7f11f4.js"></script>

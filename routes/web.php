@@ -13,6 +13,8 @@ Route::get('post', 'AdminController@newEntry')->name('post');
 
 // Admin Routes POST
 Route::post('post', 'AdminController@postEntry')->name('post.entry');
+Route::post('imagesupload', 'AdminController@galleryImageUpload')->name('imagesupload');
+
 
 Route::group(['middleware' => ['web']], function() {
     

@@ -19,7 +19,7 @@ class ProjectsController extends Controller
         
         $categories = $category->where('slug', '=', $slug)->first();
 
-        $subcategories = CategoryItem::where('parent_id', '=', $categories->id)->get();
+        $subcategories = Category::where('parent_id', '=', $categories->id)->get();
 
         return view('projects.subcategories')->with('subcategories', $subcategories);
     }

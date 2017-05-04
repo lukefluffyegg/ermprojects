@@ -20,6 +20,10 @@ class Posts extends Model
         return $this->belongsTo('App\CategoryItem');
     }
 
+    public function photos() {
+         return $this->hasMany('App\PostsGallery');
+    }
+
       public function sluggable()
     {
         return [
