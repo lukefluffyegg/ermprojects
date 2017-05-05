@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model
 {
+    use Sluggable;
+
     //protected $guarded = ['id'];
 
      protected $table = 'categories';
@@ -22,5 +25,13 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany('App\Category', 'parent_id');
+    }
+      public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }

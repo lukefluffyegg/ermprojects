@@ -24,8 +24,8 @@ class ProjectsController extends Controller
         return view('projects.subcategories')->with('subcategories', $subcategories);
     }
 
-    public function subcategory(CategoryItem $categoryitem, $slug) {
-        $subcategories = $categoryitem->where('slug', '=', $slug)->first();
+    public function subcategory(Category $category, $slug) {
+        $subcategories = $category->where('slug', '=', $slug)->first();
 
         $posts = Posts::where('sub_cat_id', '=', $subcategories->id)->get();
 
