@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Posts;
+use App\Category;
 use App\CategoryItem;
 use App\PostsGallery;
 use Image;
@@ -25,8 +26,8 @@ class AdminController extends Controller
         return view('admin.entires')->with('entires', $entires);
     }
 
-    public function newEntry(Request $request, CategoryItem $categoryitem) {
-        $subcategories = $categoryitem->get();
+    public function newEntry(Request $request, Category $category) {
+        $subcategories = $category->where('parent_id', '!=', null)->get();
         $id = uniqid();
 
         return view('admin.newentry')
@@ -48,7 +49,7 @@ class AdminController extends Controller
     $post->title = $request->input('title');
     $post->sub_cat_id = $request->input('subcategory');
     $post->description = $request->input('description');
-    $post->temp_post_id = $request->input('post_id');
+    //$post->temp_post_id = $request->input('post_id');
 
      if($request->hasFile('image')) {
          $image = $request->file('image');
@@ -80,6 +81,7 @@ class AdminController extends Controller
      $post->save();
 
         $postsGalleryId = PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->get();
+        dd($postsGalleryId);
 
         foreach($postsGalleryId as $postphotoid) {
             $testid = $postphotoid->temp_post_id;
@@ -231,6 +233,77 @@ class AdminController extends Controller
         $postDelete->delete();
 
         return redirect()->back();
+    }
+
+    public function categories(Category $category) {
+        $categories = $category->get();
+
+        return view('admin.categories')->with('categories', $categories);
+    }
+
+    public function newCategory(Category $category) {
+         $categories = $category->where('parent_id', '=', null)->get();
+
+         return view('admin.newcategory')->with('categories', $categories);
+    }
+
+    public function postCategory(Request $request) {
+        // Validate Entry data
+     $this->validate($request, array( 
+        'name' => 'required|max:255',
+        'slug' => "unique:posts,slug",
+        'image' => 'required',
+    ));
+
+    $category = new Category;
+
+    $category->name = $request->input('name');
+    $category->parent_id = $request->input('category');
+    $category->description = $request->input('description');
+
+     if($request->hasFile('image')) {
+         $image = $request->file('image');
+         $filename = time() . '.' . $image->getClientOriginalExtension();
+         $location = public_path('uploads/category/' . $filename);
+
+         $width = Image::make($image)->width();
+         $height = Image::make($image)->height();
+
+         $newWidth = 1280;
+         $newHeight = 1280;
+
+         if($width || $height > 1280) {
+            // resize image to new height but do not exceed original size
+            $image = Image::make($image)->heighten($newHeight, function ($constraint) {
+                $constraint->upsize();
+            });
+
+            // resize image to new width but do not exceed original size
+            $image = Image::make($image)->widen($newWidth, function ($constraint) {
+                $constraint->upsize();
+            });
+         }
+
+         Image::make($image)->save($location);
+         $category->image = $filename;
+     }
+
+     $category->save();
+
+      return redirect()->route('categories');
+    }
+
+    public function editCategory(Category $category, $id) {
+        $category = $category->where('id', '=', $id)->find($id);
+        $categories = $category->where('parent_id', '=', null)->get();
+
+        return view('admin.editcategory')
+        ->with('category', $category)
+        ->with('categories', $categories);
+    }
+
+    public function updateCategory() {
+
     }
 
 

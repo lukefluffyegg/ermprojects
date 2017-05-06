@@ -7,6 +7,8 @@ Auth::routes();
 Route::get('dashboard', 'AdminController@index')->name('dashboard');
 Route::get('entires', 'AdminController@entires')->name('entires');
 Route::get('categories', 'AdminController@categories')->name('categories');
+Route::get('new/category', 'AdminController@newCategory')->name('new.category');
+Route::get('edit/category/{id}', 'AdminController@editCategory')->name('edit.category');
 Route::get('pages', 'AdminController@pages')->name('pages');
 Route::get('post', 'AdminController@newEntry')->name('post');
 Route::get('editpost/{id}', 'AdminController@editPost')->name('edit.post');
@@ -16,6 +18,8 @@ Route::get('deletepost/{id}', 'AdminController@PostDelete')->name('deletepost');
 Route::post('post', 'AdminController@postEntry')->name('post.entry');
 Route::post('postedit/{id}', 'AdminController@editPost')->name('post.edit');
 Route::post('imagesupload', 'AdminController@galleryImageUpload')->name('imagesupload');
+Route::post('postcategory', 'AdminController@postCategory')->name('post.category');
+Route::post('updatecategory/{id}', 'AdminController@updateCategory')->name('category.edit');
 
 
 Route::group(['middleware' => ['web']], function() {
