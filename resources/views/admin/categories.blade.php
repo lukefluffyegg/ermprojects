@@ -14,7 +14,7 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Parent ID</th>
+                  <th>Parent Name</th>
                   <th>Created at</th>
                   <th>Edit</th>
                   <th>Delete</th>
@@ -25,10 +25,14 @@
                 <tr>
                   <td>{{ $category->id }}</td>
                   <td>{{ $category->name }}</td>
-                  <td>{{ $category->parent_id }}</td>
+                  @if($category->parent_id == null)
+                    <td></td>
+                    @else
+                    <td>{{ $category->parent->name }}</td>
+                  @endif
                   <td>{{ $category->created_at->diffForHumans() }}</td>
                   <td><a href="{{ route('edit.category', $category->id) }}">Edit</a></td>
-                  <td><a href="">Delete</a></td>
+                  <td><a href="{{ route('category.delete', $category->id) }}">Delete</a></td>
                 </tr>
              @endforeach
               </tbody>

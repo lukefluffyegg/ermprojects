@@ -96,7 +96,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return redirect()->route('entires');
+        return redirect()->route('entires')->with('info', 'Entry Added');
     }
 
 
@@ -202,7 +202,7 @@ class AdminController extends Controller
          $postUpdate->save();
 
 
-        return redirect()->back();
+        return redirect()->back()->with('Entry Updated');
     }
 
 
@@ -232,7 +232,7 @@ class AdminController extends Controller
 
         $postDelete->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('info','Entry Deleted');
     }
 
     public function categories(Category $category) {
@@ -290,7 +290,7 @@ class AdminController extends Controller
 
      $category->save();
 
-      return redirect()->route('categories');
+      return redirect()->route('categories')->with('Category Added');
     }
 
     public function editCategory(Category $category, $id) {
@@ -306,7 +306,21 @@ class AdminController extends Controller
 
     }
 
+    public function categoryDelete($id, Category $category, Request $request) {
+        // Getting category id in database
+        $categoryItem = $category->find($id);
 
+        $featuredImage = $categoryItem->image;
+
+        $featuredImagePath = public_path() . '/uploads/category/' . $featuredImage;
+
+        \File::delete($featuredImagePath);
+
+        $categoryItem->delete();
+
+        return redirect()->back()->with('info', 'Category deleted');
+
+    }   
 
 
 

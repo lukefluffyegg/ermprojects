@@ -17,15 +17,15 @@ class Category extends Model
             'id','name','slug','description','image',
         ];
 
-    public function parent()
-    {
+    public function parent() {
         return $this->belongsTo('App\Category', 'parent_id');
     }
 
-    public function children()
-    {
+    public function children() {
         return $this->hasMany('App\Category', 'parent_id');
     }
+
+
       public function sluggable()
     {
         return [

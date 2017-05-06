@@ -9,6 +9,7 @@ Route::get('entires', 'AdminController@entires')->name('entires');
 Route::get('categories', 'AdminController@categories')->name('categories');
 Route::get('new/category', 'AdminController@newCategory')->name('new.category');
 Route::get('edit/category/{id}', 'AdminController@editCategory')->name('edit.category');
+Route::get('category/delete/{id}', 'AdminController@categoryDelete')->name('category.delete');
 Route::get('pages', 'AdminController@pages')->name('pages');
 Route::get('post', 'AdminController@newEntry')->name('post');
 Route::get('editpost/{id}', 'AdminController@editPost')->name('edit.post');

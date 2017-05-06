@@ -7,11 +7,16 @@
        <!-- include nav !-->
        @include('admin.partials.nav')
         <div class="col-md-12">
+        
+        <div class="col-md-7 col-md-offset-4" style="padding-bottom: 20px">
+             <h3>Editing @if(!$category->parent_id == null) {{ $category->parent->name }} @endif > {{ $category->name }}</h3>
+        </div>
 
         <div class="panel-body">
 
         <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="{{ route('category.edit', $category->id) }}">
                 {{ csrf_field() }}
+
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-4 control-label">Name</label>
@@ -32,7 +37,7 @@
             <label for="description" class="col-md-4 control-label">Description</label>
 
             <div class="col-md-7">
-            <textarea id="description" class="form-control" name="description">{{ $category->description }}</textarea>
+            <textarea id="description" class="form-control" name="description" rows="4">{{ $category->description }}</textarea>
 
             @if ($errors->has('description'))
                 <span class="help-block">
@@ -44,7 +49,7 @@
 
 
         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-            <label for="image" class="col-md-4 control-label">Featured Image</label>
+            <label for="image" class="col-md-4 control-label">Change featured image</label>
 
             <div class="col-md-7">
                 <input type="file" name="image"  id="inputImage">
@@ -57,16 +62,16 @@
             </div>
         </div>
 
-
-
             <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-            <label for="category" class="col-md-4 control-label">Add this to a category</label>
+            <label for="category" class="col-md-4 control-label">Add or Change Parent category</label>
 
             <div class="col-md-7">
 
                 <select id="category" multiple class="form-control" id="sel2" name="category">
-                    @foreach($categories as $categorytest)
-                      <option value="{{ $categorytest->id }}" <?php echo $category->id == $categorytest->id ?  ' selected="selected"' : ''; ?>>{{ $categorytest->name }}</option>
+                    @foreach($categories as $parent)
+                      <option value="{{ $parent->id }}"  <?php if($category->parent_id == $parent->id) { echo 'selected="selected"'; } ?>>
+                          {{ $parent->name }}
+                      </option>
                     @endforeach
                 </select>
 
@@ -82,7 +87,7 @@
     <div class="form-group" >
     <div class="col-md-7 col-md-offset-4">
         <button type="submit" id="postsubmit" class="btn btn-primary">
-            Post
+            Update
         </button>
     </div>
     </div> 

@@ -6,6 +6,7 @@
 <body>
     <div id="app">
         @include('layouts.partials.nav')
+        @include('layouts.partials.alerts')
         @yield('content')
     </div>
 
