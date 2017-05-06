@@ -9,7 +9,7 @@
         <div class="col-md-12">
         
         <div class="col-md-7 col-md-offset-4" style="padding-bottom: 20px">
-             <h3>Editing @if(!$category->parent_id == null) {{ $category->parent->name }} @endif > {{ $category->name }}</h3>
+             <h3>Editing category @if(!$category->parent_id == null) {{ $category->parent->name }} @endif > {{ $category->name }}</h3>
         </div>
 
         <div class="panel-body">

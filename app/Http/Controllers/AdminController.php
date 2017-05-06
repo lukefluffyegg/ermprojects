@@ -302,7 +302,55 @@ class AdminController extends Controller
         ->with('categories', $categories);
     }
 
-    public function updateCategory() {
+    public function updateCategory($id, Category $category, Request $request) {
+        $categoryUpdate = $category->find($id);
+
+        $this->validate($request, array(
+            'name' => 'required|max:255',
+            'slug' => "unique:category,slug",
+            'description' => 'required',
+        ));
+
+        $categoryUpdate->name = $request->name;
+        $categoryUpdate->description = $request->description;
+        $categoryUpdate->parent_id = $request->category;
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('uploads/category/' . $filename);
+
+        $width = Image::make($image)->width();
+        $height = Image::make($image)->height();
+
+            $newWidth = 1280;
+            $newHeight = 1280;
+
+        if($width || $height > 1280) {
+            // resize image to new height but do not exceed original size
+            $image = Image::make($image)->heighten($newHeight, function ($constraint) {
+                $constraint->upsize();
+            });
+
+            // resize image to new width but do not exceed original size
+            $image = Image::make($image)->widen($newWidth, function ($constraint) {
+                $constraint->upsize();
+            });
+        }
+
+        Image::make($image)->save($location);
+
+        $oldFilename = $categoryUpdate->image;
+        $filepath = public_path(). '/uploads/category/' . $oldFilename;
+
+        $categoryUpdate->image = $filename;
+
+        \File::delete($filepath);
+     }
+
+     $categoryUpdate->save();
+
+     return redirect()->route('categories')->with('info', 'Category Updated');
 
     }
 
