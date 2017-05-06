@@ -39,7 +39,7 @@ tinymce.init({
                     <select id="subcategory" class="form-control" name="subcategory">
                         <option>Select a subcategory</option>
                         @foreach($subcategories as $subcategory)
-                          <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                          <option value="{{ $subcategory->id }}">{{ $subcategory->parent->name }} > {{ $subcategory->name }}</option>
                         @endforeach
                     </select>
 

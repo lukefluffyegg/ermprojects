@@ -81,7 +81,6 @@ class AdminController extends Controller
      $post->save();
 
         $postsGalleryId = PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->get();
-        dd($postsGalleryId);
 
         foreach($postsGalleryId as $postphotoid) {
             $testid = $postphotoid->temp_post_id;

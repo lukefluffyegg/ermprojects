@@ -25,6 +25,10 @@ class Category extends Model
         return $this->hasMany('App\Category', 'parent_id');
     }
 
+    public function post() {
+        return $this->hasMany('App\Posts', 'id');
+    }
+
 
       public function sluggable()
     {

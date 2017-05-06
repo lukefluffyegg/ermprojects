@@ -16,8 +16,9 @@ class Posts extends Model
             'id','title','slug','description','image',
         ];
 
-    public function subcategoy() {
-        return $this->belongsTo('App\CategoryItem');
+
+    public function subCategory() {
+        return $this->belongsTo('App\Category', 'sub_cat_id');
     }
 
     public function photos() {
