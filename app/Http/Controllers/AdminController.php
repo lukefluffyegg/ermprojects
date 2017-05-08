@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Posts;
 use App\Category;
-use App\CategoryItem;
 use App\PostsGallery;
 use App\Pages;
 use Image;
@@ -139,29 +138,31 @@ class AdminController extends Controller
     }
 
 
-    public function editPost(Posts $posts, $id) {
+    public function editPost(Posts $posts, Category $category, $id) {
         $post = $posts->where('id', '=', $id)->find($id);
+        $subcategorys = $category->where('parent_id', '!=', null)->get();
         $postgallery = PostsGallery::where('post_id', '=', $id)->get();
 
         return view('admin.editentry')
         ->with('post', $post)
-        ->with('postgallery', $postgallery);
+        ->with('postgallery', $postgallery)
+        ->with('subcategorys', $subcategorys);
     }
 
-    public function updatePost(Request $request, $id) {
+    public function updatePost(Request $request, Posts $posts, $id) {
 
-        $postUpdate = $post->find($id);
+        $postUpdate = $posts->find($id);
 
          // validate car data
         $this->validate($request, array( 
             'title' => 'required|max:255',
             'slug' => "unique:posts,slug",
-            'image' => 'required',
+            'image' => 'image',
         ));
 
-        $post->title = $request->input('title');
-        $post->sub_cat_id = $request->input('subcategory');
-        $post->description = $request->input('description');
+        $postUpdate->title = $request->input('title');
+        $postUpdate->sub_cat_id = $request->input('subcategory');
+        $postUpdate->description = $request->input('description');
         //$post->temp_post_id = $request->input('post_id');
 
         if($request->hasFile('image')) {
@@ -202,7 +203,20 @@ class AdminController extends Controller
          $postUpdate->save();
 
 
-        return redirect()->back()->with('Entry Updated');
+        return redirect()->back()->with('info', 'Post Updated');
+    }
+
+    public function ImageGalleryDelete(PostsGallery $PostsGallery, $id) {
+        $galleryImageDelete = $PostsGallery->find($id);
+
+        $galleryImage = $galleryImageDelete->image;
+        $galleryImagePath = public_path() . '/uploads/posts/' . $galleryImage;
+
+        \File::delete($galleryImagePath);
+
+        $galleryImageDelete->delete();
+
+        return redirect()->back()->with('info', 'Photo Deleted');
     }
 
 

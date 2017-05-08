@@ -15,10 +15,11 @@ Route::get('edit/page/{id}', 'AdminController@editPage')->name('edit.page');
 Route::get('post', 'AdminController@newEntry')->name('post');
 Route::get('editpost/{id}', 'AdminController@editPost')->name('edit.post');
 Route::get('deletepost/{id}', 'AdminController@PostDelete')->name('deletepost');
+Route::get('deletegalleryimage/{id}', 'AdminController@ImageGalleryDelete')->name('delete.gallery.image');
 
 // Admin Routes POST
 Route::post('post', 'AdminController@postEntry')->name('post.entry');
-Route::post('postedit/{id}', 'AdminController@editPost')->name('post.edit');
+Route::post('postedit/{id}', 'AdminController@updatePost')->name('post.edit');
 Route::post('imagesupload', 'AdminController@galleryImageUpload')->name('imagesupload');
 Route::post('postcategory', 'AdminController@postCategory')->name('post.category');
 Route::post('updatecategory/{id}', 'AdminController@updateCategory')->name('category.edit');
