@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Posts;
 
 class HomeController extends Controller
 {
@@ -21,9 +22,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Posts $posts)
     {
-        return view('home');
+        $posts = $posts->take(4)->get();
+        return view('home')->with('posts', $posts);
     }
 
 }
