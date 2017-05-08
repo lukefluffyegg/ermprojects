@@ -10,8 +10,8 @@
                 <div class="thumbnail">
                     <img src="{{ asset('uploads/posts/' . $post->image) }}" alt="" class="img-responsive">
                     <div class="caption">
-                        <a href=""><h3>{{ $post->name }}</h3></a>
-                        <p>{{ $post->description }}</p>
+                        <a href=""><h3>{{ $post->title }}</h3></a>
+                        <p>{!! $post->description !!}</p>
                     </div>
                 </div>
               @endforeach
