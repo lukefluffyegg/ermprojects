@@ -49,7 +49,7 @@ class AdminController extends Controller
     $post->title = $request->input('title');
     $post->sub_cat_id = $request->input('subcategory');
     $post->description = $request->input('description');
-    //$post->temp_post_id = $request->input('post_id');
+    $post->temp_post_id = $request->input('post_id');
 
      if($request->hasFile('image')) {
          $image = $request->file('image');
@@ -80,14 +80,16 @@ class AdminController extends Controller
 
      $post->save();
 
-        $postsGalleryId = PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->get();
 
-        foreach($postsGalleryId as $postphotoid) {
+        // Grabbing all data from carsPhotos where the field is = to the input
+        $PostsPhotosid = PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->get();
+
+        foreach($PostsPhotosid as $postphotoid) {
             $testid = $postphotoid->temp_post_id;
         }
 
-        // Checking if the input is = to the queried id 
-        if($post->temp_post_id == $testid) {
+                // Checking if the input is = to the queried id 
+            if($post->temp_post_id == $testid) {
             // Updating the cars photos table
             PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->update([
                 'post_id' => $post->id,
