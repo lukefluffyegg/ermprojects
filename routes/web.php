@@ -29,6 +29,7 @@ Route::group(['middleware' => ['web']], function() {
     
 // Projects routes
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('pages/{slug}', 'PagesController@index')->name('pages.index');
 Route::get('/projects', 'ProjectsController@index')->name('projects');
 Route::get('/category/{slug}', 'ProjectsController@subcategories')->name('category');
 Route::get('subcategory/{subcat}', 'ProjectsController@subcategory')->name('subcategory');

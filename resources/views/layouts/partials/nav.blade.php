@@ -20,8 +20,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('home') }}">About</a></li>
-                        <li><a href="{{ route('home') }}">Contact</a></li>
+                        <li><a href="{{ route('pages.index', 'about') }}">About</a></li>
+                        <li><a href="{{ route('pages.index', 'contact') }}">Contact</a></li>
                         <li><a href="{{ route('projects') }}">Projects</a></li>
                         <li><a href="{{ route('gallery') }}">Gallery</a></li>
                     </ul>
