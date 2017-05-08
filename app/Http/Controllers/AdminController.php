@@ -7,6 +7,7 @@ use App\Posts;
 use App\Category;
 use App\CategoryItem;
 use App\PostsGallery;
+use App\Pages;
 use Image;
 
 class AdminController extends Controller
@@ -367,7 +368,37 @@ class AdminController extends Controller
 
         return redirect()->back()->with('info', 'Category deleted');
 
-    }   
+    }
+
+
+    public function pages(Pages $pages) {
+        $pages = $pages->get();
+
+        return view('admin.pages')->with('pages', $pages);
+    }
+
+    public function editPage(Pages $pages, $id) {
+        $page = $pages->where('id', '=', $id)->find($id);
+        
+        return view('admin.editPage')->with('page', $page);
+    }
+
+    public function updatePage(Request $request, Pages $pages, $id) {
+
+       $pageUpdate = $pages->find($id);
+
+       $this->validate($request, array(
+            'name' => 'required|min:3|max:255',
+        ));
+
+        $pageUpdate->name = $request->name;
+        $pageUpdate->body = $request->body;
+
+        $pageUpdate->save();
+
+        return redirect()->back()->with('info', 'Page Updated');
+
+    }
 
 
 

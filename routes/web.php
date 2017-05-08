@@ -11,6 +11,7 @@ Route::get('new/category', 'AdminController@newCategory')->name('new.category');
 Route::get('edit/category/{id}', 'AdminController@editCategory')->name('edit.category');
 Route::get('category/delete/{id}', 'AdminController@categoryDelete')->name('category.delete');
 Route::get('pages', 'AdminController@pages')->name('pages');
+Route::get('edit/page/{id}', 'AdminController@editPage')->name('edit.page');
 Route::get('post', 'AdminController@newEntry')->name('post');
 Route::get('editpost/{id}', 'AdminController@editPost')->name('edit.post');
 Route::get('deletepost/{id}', 'AdminController@PostDelete')->name('deletepost');
@@ -21,6 +22,7 @@ Route::post('postedit/{id}', 'AdminController@editPost')->name('post.edit');
 Route::post('imagesupload', 'AdminController@galleryImageUpload')->name('imagesupload');
 Route::post('postcategory', 'AdminController@postCategory')->name('post.category');
 Route::post('updatecategory/{id}', 'AdminController@updateCategory')->name('category.edit');
+Route::post('updatepage/{id}', 'AdminController@updatePage')->name('page.update');
 
 
 Route::group(['middleware' => ['web']], function() {
