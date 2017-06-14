@@ -9,6 +9,7 @@ class PagesController extends Controller
 {
     public function index(Request $request, Pages $pages, $slug) {
        $slug = $request->slug;
+
        $page = $pages->where('slug', '=', $slug)->first();
 
        return view('pages')->with('page', $page);

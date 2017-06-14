@@ -10,7 +10,7 @@ use App\Posts;
 class ProjectsController extends Controller
 {
     public function index(Category $category) {
-        $categories = $category->get();
+        $categories = $category->where('parent_id', '=', null)->get();
 
         return view('projects.index')->with('categories', $categories);
     }

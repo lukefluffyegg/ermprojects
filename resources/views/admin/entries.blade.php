@@ -26,7 +26,11 @@
                 <tr>
                   <td>{{ $test->id }}</td>
                   <td>{{ $test->title }}</td>
+                  @if($test->parent_id == null)
+                    <td></td>
+                  @else
                   <td>{{ $test->subCategory->name }}</td>
+                  @endif
                   <td>{{ $test->created_at->diffForHumans() }}</td>
                   <td><a href="{{ route('edit.post', $test->id) }}">Edit</a></td>
                   <td><a href="{{ route('deletepost', $test->id) }}">Delete</a></td>

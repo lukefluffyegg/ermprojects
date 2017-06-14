@@ -15,16 +15,17 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index() {
         return view('admin.index');
+    
     }
 
-    public function entires(Posts $posts, Request $request) {
-        $entires = $posts->paginate($request->get('per-page', 20));
+    public function entries(Request $request, Posts $posts) {
+        $testentries = $posts->get();
 
-        return view('admin.entires')->with('entires', $entires);
+        return view('admin.entries')->with('testentries', $testentries);
     }
+
 
     public function newEntry(Request $request, Category $category) {
         $subcategories = $category->where('parent_id', '!=', null)->get();
@@ -88,6 +89,7 @@ class AdminController extends Controller
             $testid = $postphotoid->temp_post_id;
         }
 
+        if(isset($testid)) {
                 // Checking if the input is = to the queried id 
             if($post->temp_post_id == $testid) {
             // Updating the cars photos table
@@ -97,7 +99,9 @@ class AdminController extends Controller
             ]);
         }
 
-        return redirect()->route('entires')->with('info', 'Entry Added');
+    }
+
+        return redirect()->route('entries.index')->with('info', 'Entry Added');
     }
 
 
@@ -415,7 +419,5 @@ class AdminController extends Controller
         return redirect()->back()->with('info', 'Page Updated');
 
     }
-
-
 
 }

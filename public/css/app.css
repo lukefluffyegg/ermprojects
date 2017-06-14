@@ -4359,10 +4359,13 @@ tbody.collapse.in {
 }
 .navbar-brand {
     float: left;
-    padding: 14px 15px;
+    padding: 4px 15px 4px 0;
     font-size: 18px;
     line-height: 22px;
     height: 50px
+}
+.navbar-brand img {
+  height: 40px;
 }
 .navbar-brand:focus,
 .navbar-brand:hover {

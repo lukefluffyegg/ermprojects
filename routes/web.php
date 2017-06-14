@@ -5,7 +5,7 @@ Auth::routes();
 
 // Admin Routes GET
 Route::get('dashboard', 'AdminController@index')->name('dashboard');
-Route::get('entires', 'AdminController@entires')->name('entires');
+Route::get('entries', 'AdminController@entries')->name('entries.index');
 Route::get('categories', 'AdminController@categories')->name('categories');
 Route::get('new/category', 'AdminController@newCategory')->name('new.category');
 Route::get('edit/category/{id}', 'AdminController@editCategory')->name('edit.category');
@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function() {
     
 // Projects routes
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('pages/{slug}', 'PagesController@index')->name('pages.index');
+Route::get('pages/{slug}', 'PagesController@index')->name('page.index');
 Route::get('/projects', 'ProjectsController@index')->name('projects');
 Route::get('/category/{slug}', 'ProjectsController@subcategories')->name('category');
 Route::get('subcategory/{subcat}', 'ProjectsController@subcategory')->name('subcategory');

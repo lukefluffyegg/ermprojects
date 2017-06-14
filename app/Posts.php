@@ -25,6 +25,10 @@ class Posts extends Model
          return $this->hasMany('App\PostsGallery');
     }
 
+    public function tags() {
+        return $this->belongsToMany('App\Tag');
+    }
+
       public function sluggable()
     {
         return [

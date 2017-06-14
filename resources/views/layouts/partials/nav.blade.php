@@ -12,11 +12,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-<<<<<<< HEAD
-                      ERM-CIC
-=======
-                        {{ config('app.name', 'Erm Projects') }}
->>>>>>> ab943b4155fdea3f17d23ff044f210d228737f56
+                      <img src="/img/ermheader.jpg" />
                     </a>
                 </div>
 
@@ -24,15 +20,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('home') }}">Home</a></li>
-<<<<<<< HEAD
-=======
-                        <li><a href="{{ route('pages.index', 'about') }}">About</a></li>
-                        <li><a href="{{ route('pages.index', 'contact') }}">Contact</a></li>
->>>>>>> ab943b4155fdea3f17d23ff044f210d228737f56
                         <li><a href="{{ route('projects') }}">Projects</a></li>
-                        <li><a href="{{ route('home') }}">About</a></li>
+                        <li><a href="{{ route('page.index', 'about') }}">About</a></li>
                         <li><a href="{{ route('gallery') }}">Gallery</a></li>
-                          <li><a href="{{ route('home') }}">Contact</a></li>
+                          <li><a href="{{ route('page.index', 'contact') }}">Contact</a></li>
                           <!-- Authentication Links -->
                           @if (Auth::guest())
                           @else
