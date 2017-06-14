@@ -37,7 +37,9 @@ tinymce.init({
                 <div class="col-md-7">
 
                     <select id="subcategory" class="form-control" name="subcategory">
-                        <option>Select a subcategory</option>
+                    @foreach($subcategorys as $sub_cat)
+                        <option value="{{ $sub_cat->id }}" <?php if($post->sub_cat_id == $sub_cat->id) { echo 'selected="selected"'; } ?>>{{ $sub_cat->name }}</option>
+                    @endforeach
                     </select>
 
                     @if ($errors->has('marque'))
@@ -120,7 +122,7 @@ tinymce.init({
                 <ul class="sortable" id="sortable">
                 @foreach($postgallery as $photo)
                     <li id="item_{{ $photo->id }}">
-                        <a onclick="return confirm('Are you sure you want to delete this gallery Image?');" href="" class="delete-gallery-image"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a onclick="return confirm('Are you sure you want to delete this gallery Image?');" href="{{ route('delete.gallery.image', $photo->id) }}" class="delete-gallery-image"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         <img src="{{ asset('uploads/posts/' . $photo->image) }}" alt="">
                     </li>
                 @endforeach

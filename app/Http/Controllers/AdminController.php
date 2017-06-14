@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Posts;
 use App\Category;
-use App\CategoryItem;
 use App\PostsGallery;
+use App\Pages;
 use Image;
 
 class AdminController extends Controller
@@ -49,7 +49,7 @@ class AdminController extends Controller
     $post->title = $request->input('title');
     $post->sub_cat_id = $request->input('subcategory');
     $post->description = $request->input('description');
-    //$post->temp_post_id = $request->input('post_id');
+    $post->temp_post_id = $request->input('post_id');
 
      if($request->hasFile('image')) {
          $image = $request->file('image');
@@ -80,14 +80,16 @@ class AdminController extends Controller
 
      $post->save();
 
-        $postsGalleryId = PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->get();
 
-        foreach($postsGalleryId as $postphotoid) {
+        // Grabbing all data from carsPhotos where the field is = to the input
+        $PostsPhotosid = PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->get();
+
+        foreach($PostsPhotosid as $postphotoid) {
             $testid = $postphotoid->temp_post_id;
         }
 
-        // Checking if the input is = to the queried id 
-        if($post->temp_post_id == $testid) {
+                // Checking if the input is = to the queried id 
+            if($post->temp_post_id == $testid) {
             // Updating the cars photos table
             PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->update([
                 'post_id' => $post->id,
@@ -138,29 +140,31 @@ class AdminController extends Controller
     }
 
 
-    public function editPost(Posts $posts, $id) {
+    public function editPost(Posts $posts, Category $category, $id) {
         $post = $posts->where('id', '=', $id)->find($id);
+        $subcategorys = $category->where('parent_id', '!=', null)->get();
         $postgallery = PostsGallery::where('post_id', '=', $id)->get();
 
         return view('admin.editentry')
         ->with('post', $post)
-        ->with('postgallery', $postgallery);
+        ->with('postgallery', $postgallery)
+        ->with('subcategorys', $subcategorys);
     }
 
-    public function updatePost(Request $request, $id) {
+    public function updatePost(Request $request, Posts $posts, $id) {
 
-        $postUpdate = $post->find($id);
+        $postUpdate = $posts->find($id);
 
          // validate car data
         $this->validate($request, array( 
             'title' => 'required|max:255',
             'slug' => "unique:posts,slug",
-            'image' => 'required',
+            'image' => 'image',
         ));
 
-        $post->title = $request->input('title');
-        $post->sub_cat_id = $request->input('subcategory');
-        $post->description = $request->input('description');
+        $postUpdate->title = $request->input('title');
+        $postUpdate->sub_cat_id = $request->input('subcategory');
+        $postUpdate->description = $request->input('description');
         //$post->temp_post_id = $request->input('post_id');
 
         if($request->hasFile('image')) {
@@ -201,7 +205,20 @@ class AdminController extends Controller
          $postUpdate->save();
 
 
-        return redirect()->back()->with('Entry Updated');
+        return redirect()->back()->with('info', 'Post Updated');
+    }
+
+    public function ImageGalleryDelete(PostsGallery $PostsGallery, $id) {
+        $galleryImageDelete = $PostsGallery->find($id);
+
+        $galleryImage = $galleryImageDelete->image;
+        $galleryImagePath = public_path() . '/uploads/posts/' . $galleryImage;
+
+        \File::delete($galleryImagePath);
+
+        $galleryImageDelete->delete();
+
+        return redirect()->back()->with('info', 'Photo Deleted');
     }
 
 
@@ -367,7 +384,37 @@ class AdminController extends Controller
 
         return redirect()->back()->with('info', 'Category deleted');
 
-    }   
+    }
+
+
+    public function pages(Pages $pages) {
+        $pages = $pages->get();
+
+        return view('admin.pages')->with('pages', $pages);
+    }
+
+    public function editPage(Pages $pages, $id) {
+        $page = $pages->where('id', '=', $id)->find($id);
+        
+        return view('admin.editPage')->with('page', $page);
+    }
+
+    public function updatePage(Request $request, Pages $pages, $id) {
+
+       $pageUpdate = $pages->find($id);
+
+       $this->validate($request, array(
+            'name' => 'required|min:3|max:255',
+        ));
+
+        $pageUpdate->name = $request->name;
+        $pageUpdate->body = $request->body;
+
+        $pageUpdate->save();
+
+        return redirect()->back()->with('info', 'Page Updated');
+
+    }
 
 
 
