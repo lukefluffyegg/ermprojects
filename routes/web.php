@@ -17,6 +17,9 @@ Route::get('editpost/{id}', 'AdminController@editPost')->name('edit.post');
 Route::get('deletepost/{id}', 'AdminController@PostDelete')->name('deletepost');
 Route::get('deletegalleryimage/{id}', 'AdminController@ImageGalleryDelete')->name('delete.gallery.image');
 
+// Tags Routes GET
+//Route::get('');
+
 // Admin Routes POST
 Route::post('post', 'AdminController@postEntry')->name('post.entry');
 Route::post('postedit/{id}', 'AdminController@updatePost')->name('post.edit');
