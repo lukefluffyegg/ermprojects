@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Edit - ' . $page->name)
+
 @section('content')
 
 <div class="container-fluid">

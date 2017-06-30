@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+@section('title', 'Subcategories')
+
 @section('content')
    <div class="container">
    <div class="col-md-12">
-        <h2>Sub categories</h2>
+        <h1>Sub categories</h1>
         
             <div class="row">
                 @foreach($subcategories as $subcategory)

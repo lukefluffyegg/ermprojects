@@ -53,9 +53,21 @@ class AdminController extends Controller
     $post->temp_post_id = $request->input('post_id');
 
      if($request->hasFile('image')) {
-         $image = $request->file('image');
-         $filename = time() . '.' . $image->getClientOriginalExtension();
-         $location = public_path('uploads/posts/' . $filename);
+         
+         /*  Full Size */
+             $image = $request->file('image');
+             $filename = time() . '.' . $image->getClientOriginalExtension();
+             $location = public_path('uploads/posts/' . $filename);
+         /* End full size */
+
+         /* Thumbnail */
+             $thumbnail = $request->file('image');
+             $Thumbfilename = time() . '.' . $thumbnail->getClientOriginalExtension();
+             $thumbnailLocation = public_path('uploads/posts/thumbnail/' . $Thumbfilename);
+         /* End Thumbnail  */
+
+         // Thumbnail fit 
+        $imagethumb =  Image::make($thumbnail)->fit(300, 300);
 
          $width = Image::make($image)->width();
          $height = Image::make($image)->height();
@@ -76,6 +88,7 @@ class AdminController extends Controller
          }
 
          Image::make($image)->save($location);
+         Image::make($imagethumb)->save($thumbnailLocation);
          $post->image = $filename;
      }
 
@@ -90,7 +103,7 @@ class AdminController extends Controller
         }
 
         if(isset($testid)) {
-                // Checking if the input is = to the queried id 
+             // Checking if the input is = to the queried id 
             if($post->temp_post_id == $testid) {
             // Updating the cars photos table
             PostsGallery::where('temp_post_id', '=', $post->temp_post_id)->update([
@@ -109,10 +122,19 @@ class AdminController extends Controller
 
         if($request->hasFile('file')) {
 
-            $file = $request->file('file');
+            /* Gallery full image size */
+                $file = $request->file('file');
+                $filename = rand() . '.' . strtolower($file->getClientOriginalExtension());
+                $location = public_path('uploads/posts/' . $filename);
+            /* End Gallery full image size */
 
-            $filename = rand() . '.' . strtolower($file->getClientOriginalExtension());
-            $location = public_path('uploads/posts/' . $filename);
+            /* Gallery Thumbnail image size */
+                $thumbnail = $request->file('file');
+                $Tunmbnailfilename = rand() . '.' . strtolower($thumbnail->getClientOriginalExtension());
+                $Tumblocation = public_path('uploads/posts/thumbnail/' . $filename);
+            /* End Gallery Thumbnail image size */
+
+            $imagethumb =  Image::make($thumbnail)->fit(300, 300);
 
             $width = Image::make($file)->width();
             $height = Image::make($file)->height();
@@ -132,6 +154,7 @@ class AdminController extends Controller
                  });
             }
 
+            Image::make($imagethumb)->save($Tumblocation);
             Image::make($file)->save($location);
             $image = PostsGallery::create([
                 'post_id' => $request->input('post_id'),
@@ -172,9 +195,21 @@ class AdminController extends Controller
         //$post->temp_post_id = $request->input('post_id');
 
         if($request->hasFile('image')) {
+            
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $location = public_path('uploads/posts/' . $filename);
+
+
+            /* Thumbnail */
+                 $thumbnail = $request->file('image');
+                 $Thumbfilename = time() . '.' . $thumbnail->getClientOriginalExtension();
+                 $thumbnailLocation = public_path('uploads/posts/thumbnail/' . $Thumbfilename);
+             /* End Thumbnail  */
+
+            // Thumbnail fit 
+            $imagethumb =  Image::make($thumbnail)->fit(300, 300);
+
             
             $width = Image::make($image)->width();
                 $height = Image::make($image)->height();
@@ -196,6 +231,7 @@ class AdminController extends Controller
 
          }
 
+            Image::make($imagethumb)->save($thumbnailLocation);
             Image::make($image)->save($location);
             
             $oldFilename = $postUpdate->image;
@@ -282,9 +318,18 @@ class AdminController extends Controller
     $category->description = $request->input('description');
 
      if($request->hasFile('image')) {
+
          $image = $request->file('image');
          $filename = time() . '.' . $image->getClientOriginalExtension();
          $location = public_path('uploads/category/' . $filename);
+
+         /* Categroy Thunmbnail */
+             $thumbnail = $request->file('image');
+             $Thumbnailfilename = time() . '.' . $thumbnail->getClientOriginalExtension();
+             $Thumblocation = public_path('uploads/category/thumbnail/' . $filename);
+         /* Categroy Thunmbnail end */
+
+         $thumbImage = Image::make($thumbnail)->fit(300);
 
          $width = Image::make($image)->width();
          $height = Image::make($image)->height();
@@ -304,6 +349,7 @@ class AdminController extends Controller
             });
          }
 
+         Image::make($thumbImage)->save($Thumblocation);
          Image::make($image)->save($location);
          $category->image = $filename;
      }
@@ -336,9 +382,20 @@ class AdminController extends Controller
         $categoryUpdate->parent_id = $request->category;
 
         if($request->hasFile('image')) {
+            
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $location = public_path('uploads/category/' . $filename);
+
+
+         /* Categroy Thunmbnail */
+             $thumbnail = $request->file('image');
+             $Thumbnailfilename = time() . '.' . $thumbnail->getClientOriginalExtension();
+             $Thumblocation = public_path('uploads/category/thumbnail/' . $filename);
+         /* Categroy Thunmbnail end */
+
+         $thumbImage = Image::make($thumbnail)->fit(300);
+
 
         $width = Image::make($image)->width();
         $height = Image::make($image)->height();
@@ -358,6 +415,7 @@ class AdminController extends Controller
             });
         }
 
+        Image::make($thumbImage)->save($Thumblocation);
         Image::make($image)->save($location);
 
         $oldFilename = $categoryUpdate->image;

@@ -1060,7 +1060,7 @@ html {
     -webkit-tap-highlight-color: transparent
 }
 body {
-    font-family: Raleway, sans-serif;
+    font-family: Arial;
     font-size: 14px;
     line-height: 1.6;
     color: #636b6f;
@@ -4359,13 +4359,13 @@ tbody.collapse.in {
 }
 .navbar-brand {
     float: left;
-    padding: 4px 15px 4px 0;
+    padding: 15px 15px;
     font-size: 18px;
     line-height: 22px;
     height: 50px
 }
 .navbar-brand img {
-  height: 40px;
+  height: 75px;
 }
 .navbar-brand:focus,
 .navbar-brand:hover {
@@ -4442,13 +4442,14 @@ tbody.collapse.in {
 @media (min-width: 768px) {
     .navbar-nav {
         float: right;
-        margin: 0
+        margin-right: -15px;
+        margin-top:30px;
     }
     .navbar-nav>li {
         float: left
     }
     .navbar-nav>li>a {
-        padding-top: 14px;
+    
         padding-bottom: 14px
     }
 }
@@ -4576,7 +4577,8 @@ tbody.collapse.in {
 }
 .navbar-default {
     background-color: #fff;
-    border-color: #d3e0e9
+    border-color: #d3e0e9;
+    min-height:100px;
 }
 .navbar-default .navbar-brand {
     color: #777
@@ -6807,7 +6809,7 @@ button.close {
 @media (min-width: 768px) {
     .sidebar {
         position: absolute;
-        top: 51px;
+        top: 100px;
         left: 0;
         z-index: 1000;
         display: block;

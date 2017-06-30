@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\CategoryItem;
+use App\PostsGallery;
 use App\Posts;
 
 class ProjectsController extends Controller
@@ -34,7 +35,8 @@ class ProjectsController extends Controller
 
     public function postEntry(Posts $posts, $slug) {
         $entry = $posts->where('slug', '=', $slug)->first();
+        $photos = PostsGallery::where('post_id', '=', $entry->id)->get();
 
-        return view('projects.postentry')->with('entry', $entry);
+        return view('projects.postentry')->with('entry', $entry)->with('photos', $photos);
     }
 }

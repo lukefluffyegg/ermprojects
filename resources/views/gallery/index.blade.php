@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
+@section('title', 'Gallery')
+
 @section('content')
    <div class="container">
    <div class="col-md-12">
-        <h2>Gallery page</h2>
+        <h1>Gallery page</h1>
       
             <div class="row">
                 
                 @foreach($entries as $post)
                 <div class="col-md-3">
                 <div class="thumbnail">
-                    <img src="{{ asset('uploads/posts/' . $post->image) }}" alt="" class="img-responsive">
-                    <div class="caption">
-                        <a href=""><h3>{{ $post->title }}</h3></a>
-                        <p>{!! $post->description !!}</p>
-                    </div>
+                      <a href="{{ route('postentry', $post->slug) }}">
+                        <img src="{{ asset('uploads/posts/thumbnail/' . $post->image) }}" alt="" class="img-responsive">
+                      </a>
                 </div>
               </div>
               @endforeach

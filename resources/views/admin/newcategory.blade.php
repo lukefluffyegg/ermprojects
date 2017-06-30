@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'New category')
+
 @section('content')
 
 <div class="container-fluid">
