@@ -42,9 +42,12 @@
 
             <div class="row">
                 @foreach($photos as $photo)
+                    <div class="col-md-4">
                     <a href="#">
-                        <img src="{{ asset('uploads/posts/' . $entry->image) }}" alt="" style="width:33%; height: auto; margin-bottom: 1em; margin-top: 1em;">
+                        <img src="{{ asset('uploads/posts/thumbnail/' . $photo->image) }}" alt="" style="width: 100%; height: auto; margin-bottom: 1em; margin-top: 1em;">
                     </a>
+                    </div>
+
                     @php
                      $photoscount++;
                      @endphp
@@ -53,6 +56,10 @@
             @if($photoscount < 1) 
             There are no additional photos
             @endif
+            </div>
+
+            <div class="media">
+                <iframe src="https://player.vimeo.com/video/122375452" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
 
           </div>

@@ -6902,3 +6902,13 @@ button.close {
 .delete-gallery-image i:hover {
     color: red;
 }
+
+
+.main-image {
+     margin-top: 22px;
+    margin-bottom: 11px;
+}
+
+.right {
+    float:right;
+}

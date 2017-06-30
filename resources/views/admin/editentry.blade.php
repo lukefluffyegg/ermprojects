@@ -100,7 +100,11 @@
       </div>
     </div>
 
-        <div class="col-md-12">
+          <div class="form-group">
+
+          <div class="col-md-8 right">
+              
+         
       
             <div id="gallery-images">
                 <ul class="sortable" id="sortable">
@@ -111,7 +115,7 @@
                     </li>
                 @endforeach
                 </ul>
-           
+            </div>
             </div>
      
        </div>
