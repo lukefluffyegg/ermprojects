@@ -14,7 +14,7 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
-                  <th>Created at</th>
+                  <th>Updated at</th>
                   <th>Edit</th>
                   <!--<th>Delete</th>!-->
                 </tr>
@@ -24,7 +24,7 @@
                 <tr>
                   <td>{{ $page->id }}</td>
                   <td>{{ $page->name }}</td>
-                  <td>{{ $page->created_at->diffForHumans() }}</td>
+                  <td>{{ $page->updated_at->diffForHumans() }}</td>
                   <td><a href="{{ route('edit.page', $page->id) }}">Edit</a></td>
                   <!--<td><a href="">Delete</a></td>!-->
                 </tr>
