@@ -39,7 +39,8 @@ Route::get('/category/{slug}', 'ProjectsController@subcategories')->name('catego
 Route::get('subcategory/{subcat}', 'ProjectsController@subcategory')->name('subcategory');
 Route::get('entry/{slug}', 'ProjectsController@postEntry')->name('postentry');
 
-// Gallery Routes
+// Genreal Routes
 Route::get('/gallery', 'GalleryController@index')->name('gallery');
+Route::post('/contact', 'ContactController@store')->name('send.contact');
 
 });

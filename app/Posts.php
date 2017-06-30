@@ -13,7 +13,7 @@ class Posts extends Model
     protected $table = 'posts';
 
       protected $fillable = [
-            'id','title','slug','description','image',
+            'id','title','slug','description','image','vimeo_id',
         ];
 
 

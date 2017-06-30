@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('slug', 255);
             $table->text('description');
             $table->string('image', 255);
+            $table->string('vimeo_id', 255)->nullable();
             $table->timestamps();
            // $table->foreign('sub_cat_id')->references('parent_id')->on('categories')->onDelete('cascade');
 

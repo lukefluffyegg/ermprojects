@@ -66,6 +66,28 @@
         </div>
 
 
+            <div class="form-group{{ $errors->has('vimeo_id') ? ' has-error' : '' }}">
+                <label for="vimeo_id" class="col-md-4 control-label">Vimeo Link ID</label>
+
+                <div class="col-md-7">
+
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon3">https://player.vimeo.com/video/</span>
+                <input id="vimeo_id" type="text" class="form-control" name="vimeo_id" value="">
+
+                </div>
+
+                @if ($errors->has('vimeo_id'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('vimeo_id') }}</strong>
+                    </span>
+                @endif
+                </div>
+            </div>
+
+
+
+
         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
             <label for="image" class="col-md-4 control-label">Featured Image</label>
 

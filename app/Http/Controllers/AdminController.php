@@ -43,6 +43,7 @@ class AdminController extends Controller
         'title' => 'required|max:255',
         'slug' => "unique:posts,slug",
         'image' => 'required',
+        'vimeo_id' => 'max:255',
     ));
 
     $post = new Posts;
@@ -50,6 +51,7 @@ class AdminController extends Controller
     $post->title = $request->input('title');
     $post->sub_cat_id = $request->input('subcategory');
     $post->description = $request->input('description');
+    $post->vimeo_id = $request->input('vimeo_id');
     $post->temp_post_id = $request->input('post_id');
 
      if($request->hasFile('image')) {
@@ -187,11 +189,13 @@ class AdminController extends Controller
             'title' => 'required|max:255',
             'slug' => "unique:posts,slug",
             'image' => 'image',
+            'vimeo_id' => 'max:255',
         ));
 
         $postUpdate->title = $request->input('title');
         $postUpdate->sub_cat_id = $request->input('subcategory');
         $postUpdate->description = $request->input('description');
+        $postUpdate->vimeo_id = $request->input('vimeo_id');
         //$post->temp_post_id = $request->input('post_id');
 
         if($request->hasFile('image')) {
