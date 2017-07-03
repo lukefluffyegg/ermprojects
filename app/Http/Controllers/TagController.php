@@ -22,7 +22,7 @@ class TagController extends Controller
     {
         $tags = Tag::all();
 
-        return view('tags.index')->with('Tags', $tags);
+        return view('tags.index')->with('tags', $tags);
     }
 
     /**
@@ -32,16 +32,7 @@ class TagController extends Controller
      */
     public function create(Request $request)
     {
-        $this->validate($request, array(
-            'name' => 'required|max:255',
-        ));
-
-        $tag = new Tag;
-
-        $tag->name = $request->name;
-        $tag->save();
         
-        return redirect()->route('tags.index')->with('info', 'New Tag added');
     }
 
     /**
@@ -52,7 +43,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, array(
+        'name' => 'required|max:255',
+        ));
+
+        $tag = new Tag;
+
+        $tag->name = $request->name;
+        $tag->save();
+
+        return redirect()->route('tags.index')->with('info', 'New Tag added');
     }
 
     /**

@@ -18,7 +18,15 @@ Route::get('deletepost/{id}', 'AdminController@PostDelete')->name('deletepost');
 Route::get('deletegalleryimage/{id}', 'AdminController@ImageGalleryDelete')->name('delete.gallery.image');
 
 // Tags Routes GET
-//Route::get('');
+Route::get('tags', 'TagController@index')->name('tags.index');
+Route::get('tags/{tags}', 'TagController@show')->name('tags.show');
+Route::get('tags/{tags}/edit', 'TagController@edit')->name('tags.edit');
+
+// Tags Routes POST
+Route::post('tags', 'TagController@store')->name('tags.store');
+Route::put('tags/{tags}', 'TagController@update')->name('tags.update');
+Route::delete('tags/{tags}', 'TagController@destroy')->name('tags.destroy');
+
 
 // Admin Routes POST
 Route::post('post', 'AdminController@postEntry')->name('post.entry');

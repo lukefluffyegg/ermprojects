@@ -66,25 +66,45 @@
         </div>
 
 
-            <div class="form-group{{ $errors->has('vimeo_id') ? ' has-error' : '' }}">
-                <label for="vimeo_id" class="col-md-4 control-label">Vimeo Link ID</label>
+        <div class="form-group{{ $errors->has('vimeo_id') ? ' has-error' : '' }}">
+            <label for="vimeo_id" class="col-md-4 control-label">Vimeo Link ID</label>
+
+            <div class="col-md-7">
+
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon3">https://player.vimeo.com/video/</span>
+            <input id="vimeo_id" type="text" class="form-control" name="vimeo_id" value="">
+
+            </div>
+
+            @if ($errors->has('vimeo_id'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('vimeo_id') }}</strong>
+                </span>
+            @endif
+            </div>
+        </div>
+
+
+         <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+                <label for="tag_id" class="col-md-4 control-label">Tags</label>
 
                 <div class="col-md-7">
 
-                <div class="input-group">
-                  <span class="input-group-addon" id="basic-addon3">https://player.vimeo.com/video/</span>
-                <input id="vimeo_id" type="text" class="form-control" name="vimeo_id" value="">
+                    <select id="tags" class="form-control select2-multi" name="tags" multiple="multiple">
+                        <option>Select a Tag</option>
+                        @foreach($tags as $tag)
+                          <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
 
-                </div>
-
-                @if ($errors->has('vimeo_id'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('vimeo_id') }}</strong>
-                    </span>
-                @endif
+                    @if ($errors->has('tags'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('tags') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
-
 
 
 
@@ -131,5 +151,6 @@
 
         </div>
     </div>
+</div>
 </div>
 @endsection

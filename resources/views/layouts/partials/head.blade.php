@@ -10,6 +10,7 @@
 <!-- Styles -->
 <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 
 
 <!-- Scripts -->

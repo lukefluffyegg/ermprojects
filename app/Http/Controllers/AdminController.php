@@ -8,6 +8,7 @@ use App\Category;
 use App\PostsGallery;
 use App\Pages;
 use Image;
+use App\Tag;
 
 class AdminController extends Controller
 {
@@ -30,10 +31,12 @@ class AdminController extends Controller
     public function newEntry(Request $request, Category $category) {
         $subcategories = $category->where('parent_id', '!=', null)->get();
         $id = uniqid();
+        $tags = Tag::all();
 
         return view('admin.newentry')
         ->with('subcategories', $subcategories)
-        ->with('id', $id);
+        ->with('id', $id)
+        ->with('tags', $tags);
     }
 
     public function postEntry(Request $request) {
