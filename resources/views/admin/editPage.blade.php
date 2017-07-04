@@ -34,7 +34,7 @@
             <label for="body" class="col-md-4 control-label">Body</label>
 
             <div class="col-md-7">
-            <textarea id="body" class="form-control" name="body">{{ $page->body }}</textarea>
+            <textarea id="description" class="form-control" name="body">{{ $page->body }}</textarea>
 
             @if ($errors->has('body'))
                 <span class="help-block">
