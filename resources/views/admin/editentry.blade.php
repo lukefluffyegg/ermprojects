@@ -2,6 +2,12 @@
 
 @section('title', 'Edit - ' . $post->title)
 
+@section('stylesheets')
+
+<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
+@endsection
+
 @section('content')
 
 <div class="container-fluid">
@@ -83,6 +89,27 @@
             </div>
 
 
+             <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+                <label for="tag_id" class="col-md-4 control-label">Tags</label>
+
+                <div class="col-md-7">
+
+                    <select id="tags" class="form-control select2-multi" name="tags[]" multiple="multiple">
+                        <option>Select a Tag</option>
+                        @foreach($tags as $tag)
+                          <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+
+                    @if ($errors->has('tags'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('tags') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+
 
         <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
             <label for="image" class="col-md-4 control-label">Featured Image</label>
@@ -127,7 +154,7 @@
          
       
             <div id="gallery-images">
-                <ul class="sortable" id="sortable">
+                <ul class="sortable">
                 @foreach($postgallery as $photo)
                     <li id="item_{{ $photo->id }}">
                         <a onclick="return confirm('Are you sure you want to delete this gallery Image?');" href="{{ route('delete.gallery.image', $photo->id) }}" class="delete-gallery-image"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -149,4 +176,18 @@
         </div>
     </div>
 </div>
+
+@section('js')
+
+    <script src="{{ URL::asset('js/select2.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(".select2-multi").select2();
+        $(".select2-multi").select2().val({!! $post->tags()->allRelatedIds() !!}).trigger('change');
+    </script>
+
+
+@endsection
+
+
 @endsection

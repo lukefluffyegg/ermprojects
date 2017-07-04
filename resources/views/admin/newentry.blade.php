@@ -3,6 +3,12 @@
 
 @section('title', 'New Entry')
 
+@section('stylesheets')
+
+<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
+@endsection
+
 @section('content')
 
 <div class="container-fluid">
@@ -91,7 +97,7 @@
 
                 <div class="col-md-7">
 
-                    <select id="tags" class="form-control select2-multi" name="tags" multiple="multiple">
+                    <select id="tags" class="form-control select2-multi" name="tags[]" multiple="multiple">
                         <option>Select a Tag</option>
                         @foreach($tags as $tag)
                           <option value="{{ $tag->id }}">{{ $tag->name }}</option>
@@ -153,4 +159,17 @@
     </div>
 </div>
 </div>
+
+
+@section('js')
+
+    
+    <script src="{{ URL::asset('js/select2.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(".select2-multi").select2();
+    </script>
+
+@endsection
+
 @endsection

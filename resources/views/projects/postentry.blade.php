@@ -28,8 +28,16 @@
 
         {!! $entry->description !!}
 
+        <hr>
+
+        <div class="tags">
+            @foreach($entry->tags as $tag)
+                <span class="label label-default">{{ $tag->name }}</span>
+            @endforeach
+        </div>
+
         
-  </div> 
+      </div> 
 
           <div class="col-md-7">
             <div class="main-image">

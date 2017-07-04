@@ -97,7 +97,10 @@ class AdminController extends Controller
          $post->image = $filename;
      }
 
+     
      $post->save();
+
+     $post->tags()->sync($request->tags, false);
 
 
         // Grabbing all data from carsPhotos where the field is = to the input
@@ -176,11 +179,13 @@ class AdminController extends Controller
         $post = $posts->where('id', '=', $id)->find($id);
         $subcategorys = $category->where('parent_id', '!=', null)->get();
         $postgallery = PostsGallery::where('post_id', '=', $id)->get();
+        $tags = Tag::all();
 
         return view('admin.editentry')
         ->with('post', $post)
         ->with('postgallery', $postgallery)
-        ->with('subcategorys', $subcategorys);
+        ->with('subcategorys', $subcategorys)
+        ->with('tags', $tags);
     }
 
     public function updatePost(Request $request, Posts $posts, $id) {
@@ -251,7 +256,12 @@ class AdminController extends Controller
 
          $postUpdate->save();
 
-
+         if(isset($request->tags)) {
+            $postUpdate->tags()->sync($request->tags);
+         } else {
+            $postUpdate->tags()->sync(array());
+         }
+         
         return redirect()->back()->with('info', 'Post Updated');
     }
 
