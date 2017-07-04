@@ -32,7 +32,7 @@
 
         <div class="tags">
             @foreach($entry->tags as $tag)
-                <span class="label label-default">{{ $tag->name }}</span>
+                <a href="{{ route('tags.show', $tag->id) }}"><span class="label label-default">{{ $tag->name }}</span></a>
             @endforeach
         </div>
 

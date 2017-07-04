@@ -283,6 +283,7 @@ class AdminController extends Controller
     public function PostDelete($id) {
         
         $postDelete = Posts::where('id', '=', $id)->find($id);
+        $postDelete->tags()->detach();
         $photoGallery = PostsGallery::where('post_id', '=', $id)->get();
         
         if($postDelete) {

@@ -19,13 +19,13 @@ Route::get('deletegalleryimage/{id}', 'AdminController@ImageGalleryDelete')->nam
 
 // Tags Routes GET
 Route::get('tags', 'TagController@index')->name('tags.index');
-Route::get('tags/{tags}', 'TagController@show')->name('tags.show');
+Route::get('tags/{tags}', 'ProjectsController@showTaggedPosts')->name('tags.show');
 Route::get('tags/{tags}/edit', 'TagController@edit')->name('tags.edit');
 
 // Tags Routes POST
 Route::post('tags', 'TagController@store')->name('tags.store');
-Route::put('tags/{tags}', 'TagController@update')->name('tags.update');
-Route::delete('tags/{tags}', 'TagController@destroy')->name('tags.destroy');
+Route::post('tags/{tags}', 'TagController@update')->name('tags.update');
+Route::post('tags/delete/{tags}', 'TagController@destroy')->name('tags.destroy');
 
 
 // Admin Routes POST

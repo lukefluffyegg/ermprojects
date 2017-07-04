@@ -37,6 +37,10 @@ jQuery(document).ready(function()  {
         e.preventdefault();
     });
 
+        jQuery('.dropdown-toggle').click(function() {
+      jQuery('.dropdown-menu').toggle();
+    });
+
     function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

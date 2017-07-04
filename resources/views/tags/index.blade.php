@@ -17,6 +17,8 @@
                   <th>#</th>
                   <th>Name</th>
                   <th>Created at</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -26,6 +28,14 @@
                   <td>{{ $tag->id }}</td>
                   <td>{{ $tag->name }}</td>
                   <td>{{ $tag->created_at->diffForHumans() }}</td>
+                  <td><a href="{{ route('tags.edit', $tag->id) }}">Edit</a></td>
+                <form role="form" method="POST" action="{{ route('tags.destroy', $tag->id) }}">
+                  {{ csrf_field() }}
+
+                    <td><button class="link-style">Delete</button></td>
+
+                  </form>
+                 
                 </tr>
 
              @endforeach

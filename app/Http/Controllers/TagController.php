@@ -13,6 +13,7 @@ class TagController extends Controller
         $this->middleware('auth');
     }
 
+
     /**
      * Display a listing of the resource.
      *
@@ -63,7 +64,7 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -74,7 +75,9 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+
+        return view('tags.edit')->with('tag', $tag);
     }
 
     /**
@@ -86,7 +89,19 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tag = Tag::find($id);
+
+        // Validate Entry data
+        $this->validate($request, array( 
+            'name' => 'required|max:255',
+        ));
+
+
+        $tag->name = $request->name;
+
+        $tag->save();
+
+        return redirect()->route('tags.index')->with('info', 'Tag Updated');
     }
 
     /**
@@ -97,6 +112,11 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag->posts()->detach();
+
+        $tag->delete();
+
+        return redirect()->route('tags.index')->with('info', 'Tag Deleted');
     }
 }

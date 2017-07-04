@@ -7,6 +7,7 @@ use App\Category;
 use App\CategoryItem;
 use App\PostsGallery;
 use App\Posts;
+use App\Tag;
 
 class ProjectsController extends Controller
 {
@@ -38,5 +39,10 @@ class ProjectsController extends Controller
         $photos = PostsGallery::where('post_id', '=', $entry->id)->get();
 
         return view('projects.postentry')->with('entry', $entry)->with('photos', $photos);
+    }
+
+    public function showTaggedPosts($id) {
+        $tag = Tag::find($id);
+        return view('tags.show')->with('tag', $tag);
     }
 }
