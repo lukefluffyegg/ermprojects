@@ -14,7 +14,7 @@
                     <img src="{{ asset('uploads/category/' . $subcategory->image) }}" alt="" class="img-responsive">
                     <div class="caption">
                         <a href="{{ route('subcategory', $subcategory->slug) }}"><h3>{{ $subcategory->name }}</h3></a>
-                        <p>{!! substr($subcategory->description, 0, 300) !!}</p>
+                        <p>{!! substr(strip_tags($subcategory->description), 0, 300) !!}</p>
                     </div>
                   </div>
                 </div>
