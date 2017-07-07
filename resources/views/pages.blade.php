@@ -65,7 +65,7 @@
                             <label for="Bodymessage" class="col-md-3 control-label">Message</label>
 
                             <div class="col-md-7">
-                                <input id="Bodymessage" type="text" class="form-control" name="Bodymessage" value="{{ old('Bodymessage') }}" required>
+                                <textarea id="Bodymessage" class="form-control" name="Bodymessage">{{ old('Bodymessage') }}</textarea>
 
                                 @if ($errors->has('Bodymessage'))
                                     <span class="help-block">

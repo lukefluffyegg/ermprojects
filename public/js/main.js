@@ -32,8 +32,9 @@ var handleDropzoneFileUpload = {
 jQuery(document).ready(function()  {
     console.log('Document is ready');
 
-    $('#triggersubmit').on('click', function(e) {
-        $('#postsubmit').click();
+    jQuery('#triggersubmit').on('click', function(e) {
+        
+    jQuery('#postsubmit').click();
         e.preventdefault();
     });
 

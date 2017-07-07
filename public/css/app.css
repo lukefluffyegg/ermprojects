@@ -6945,3 +6945,9 @@ button.close {
     background: #73A5C6;
     padding: 8px;
 }
+
+.control-label {
+        text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+}

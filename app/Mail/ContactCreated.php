@@ -11,7 +11,7 @@ class ContactCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $sender;
+    public $name;
     public $email;
     public $Bodymessage;
 
@@ -20,9 +20,9 @@ class ContactCreated extends Mailable
      *
      * @return void
      */
-    public function __construct($sender, $email, $Bodymessage)
+    public function __construct($name, $email, $Bodymessage)
     {
-        $this->sender = $sender;
+        $this->name = $name;
         $this->email = $email;
         $this->Bodymessage = $Bodymessage;
     }
@@ -35,7 +35,7 @@ class ContactCreated extends Mailable
     public function build()
     {
         return $this->view('email.contact')
-        ->subject("{$this->sender} sent a message")
+        ->subject("{$this->name} sent a message")
         ->from('erm@erm.com')
         ->replyTo($this->email);
     }

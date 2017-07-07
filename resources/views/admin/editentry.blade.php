@@ -128,7 +128,7 @@
         <input type="hidden" name="post_id" value="{{ $post->id }}">
 
        
-        <div class="form-group" >
+        <div class="form-group" style="display: none;">
             <div class="col-md-7 col-md-offset-4">
                 <button type="submit" id="postsubmit" class="btn btn-primary">
                     Update
@@ -167,11 +167,11 @@
      
        </div>
 
-    <!--<div class="form-group">
-    <div class="col-md-7 col-md-offset-4" style="padding-top:10px;">
-        <button id="triggersubmit" class="btn btn-primary">Create</button>
+    <div class="form-group">
+        <div class="col-md-7 col-md-offset-4" style="padding-top:10px;">
+            <button id="triggersubmit" class="btn btn-primary">Update</button>
+        </div>
     </div>
-    </div>!-->
 
         </div>
     </div>

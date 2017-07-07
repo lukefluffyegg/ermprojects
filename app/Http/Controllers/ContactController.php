@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Mail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-//use App\Http\Requests\ContactFormRequest;
+use App\Http\Requests\ContactFormRequest;
 use App\Mail\ContactCreated;
 
 class ContactController extends Controller
@@ -16,14 +16,14 @@ class ContactController extends Controller
     }
 
 
-    public function store(Request $request) {
+    public function store(ContactFormRequest $request) {
 
         // Validate Entry data
-        $this->validate($request, array( 
+        /*$this->validate($request, array( 
             'name' => 'required|max:255',
             'email' => "required|max:255",
             'Bodymessage' => 'required',
-        ));
+        ));*/
 
         $emailto = 'luke@fluffyegg.com';
 

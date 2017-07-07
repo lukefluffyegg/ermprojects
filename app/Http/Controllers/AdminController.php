@@ -270,8 +270,10 @@ class AdminController extends Controller
 
         $galleryImage = $galleryImageDelete->image;
         $galleryImagePath = public_path() . '/uploads/posts/' . $galleryImage;
+        $thumbnailPath = public_path() . '/uploads/posts/thumbnail/' . $galleryImage;
 
         \File::delete($galleryImagePath);
+        \File::delete($thumbnailPath);
 
         $galleryImageDelete->delete();
 
@@ -285,24 +287,15 @@ class AdminController extends Controller
         $postDelete = Posts::where('id', '=', $id)->find($id);
         $postDelete->tags()->detach();
         $photoGallery = PostsGallery::where('post_id', '=', $id)->get();
-        
-        if($postDelete) {
-           foreach($photoGallery as $photo) {
-              $PostGalleryImage = $photo->image;
-
-              $photo->delete();
-            }
-
-            $images = $PostGalleryImage;
-        }
+    
 
         $featuredImage = $postDelete->image;
 
         $featuredImagePath = public_path() . '/uploads/posts/' . $featuredImage;
-        $carGalleryPath = public_path() . '/uploads/posts/' . $images;
+        $thumbnailPath = public_path() . '/uploads/posts/thumbnail/' . $featuredImage;
 
         \File::delete($featuredImagePath);
-        \File::delete($carGalleryPath);
+        \File::delete($thumbnailPath);
 
         $postDelete->delete();
 
@@ -457,8 +450,10 @@ class AdminController extends Controller
         $featuredImage = $categoryItem->image;
 
         $featuredImagePath = public_path() . '/uploads/category/' . $featuredImage;
+        $thumbnailPath = public_path() . '/uploads/category/thumbnail/' . $featuredImage;
 
         \File::delete($featuredImagePath);
+        \File::delete($thumbnailPath);
 
         $categoryItem->delete();
 

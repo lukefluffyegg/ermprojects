@@ -1,9 +1,9 @@
 Hi ERM CIC, <br><br>
 
-{{ $sender }} has contacted you. His details are as follows:
+{{ $name }} has contacted you. His details are as follows:
 <br><br>
 
-Name: {{ $sender }} <br>
+Name: {{ $name }} <br>
 Email: {{ $email }} <br>
 Message: {{ $Bodymessage }}
 <br><br>
