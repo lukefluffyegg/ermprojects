@@ -20,4 +20,8 @@ class PagesController extends Controller
 
         return $pages;
     }
+
+    public function pressPage() {
+        return view('genreal.press');
+    }
 }

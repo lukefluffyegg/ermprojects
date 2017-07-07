@@ -4,8 +4,6 @@
 
     if($page->slug === 'about') {
         $title = 'About';
-    } elseif($page->slug === 'press') {
-        $title = 'Press';
     } elseif($page->slug === 'contact') {
         $title = 'Contact';
     }
