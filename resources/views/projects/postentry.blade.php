@@ -7,17 +7,21 @@
    <div class="container">
         <div class="col-md-12">
     
-        <!--<a href="<?php
-        /*if($_SERVER['HTTP_REFERER']=='http://ermp.app:8000/') {
+
+    <div style="margin-left:1.5%">
+     <a href="<?php
+        if($_SERVER['HTTP_REFERER']=='http://ermp.app:8000/') {
         print '/subcategory/';
         } else {
         print 'javascript:window.history.back()';
-        };*/
-        ?>" class="btn btn-sm btn-success">&lt; back to category</a>!-->
+        };
+        ?>" class="btn btn-sm btn-success post-entry-back">&lt; back to category</a>
 
-           <div class="col-md-5">
+        </div>
+          
+         <div class="col-md-5">
 
-          <h1>{{ $entry->title }}</h1>
+          <h1 class="entry-title">{{ $entry->title }}</h1>
 
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">{{ $entry->subCategory->name }}</a></li>
@@ -41,7 +45,9 @@
 
           <div class="col-md-7">
             <div class="main-image">
-            <img src="{{ asset('uploads/posts/' . $entry->image) }}" alt="" style="width:100%; height: auto; margin-bottom: 1em; margin-top: 1em;">
+            <a href="{{ asset('uploads/posts/' . $entry->image) }}" data-featherlight="image">
+                <img src="{{ asset('uploads/posts/' . $entry->image) }}" alt="" style="width:100%; height: auto; margin-bottom: 1em; margin-top: 1em;">
+            </a>
             </div>
 
             @php
@@ -51,8 +57,8 @@
             <div class="row">
                 @foreach($photos as $photo)
                     <div class="col-md-4">
-                    <a href="#">
-                        <img src="{{ asset('uploads/posts/thumbnail/' . $photo->image) }}" alt="" style="width: 100%; height: auto; margin-bottom: 1em; margin-top: 1em;">
+                    <a href="{{ asset('uploads/posts/' . $photo->image) }}" data-featherlight="image">
+                        <img src="{{ asset('uploads/posts/thumbnail/' . $photo->image) }}"  alt="" style="width: 100%; height: auto; margin-bottom: 1em; margin-top: 1em;">
                     </a>
                     </div>
 

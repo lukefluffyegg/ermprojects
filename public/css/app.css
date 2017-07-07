@@ -6924,3 +6924,24 @@ button.close {
      text-decoration:none;
      cursor:pointer;
 }
+
+
+.entry-title {
+    color:#000;
+}
+
+.breadcrumb>li+li:before {
+    content: ">";
+    color:#000;
+}
+
+.breadcrumb>.active {
+    color:#000;
+}
+
+.post-entry-back {
+        border: none;
+    border-radius: 0;
+    background: #73A5C6;
+    padding: 8px;
+}
