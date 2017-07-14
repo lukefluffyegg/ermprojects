@@ -13,7 +13,7 @@
                  <div class="thumbnail">
                     <img src="{{ asset('uploads/posts/thumbnail/' . $post->image) }}" alt="" class="img-responsive">
                     <div class="caption">
-                        <a href="{{ route('postentry', $post->slug) }}"><h3>{{ $post->title }}</h3></a>
+                        <a href="{{ route('postentry', $post->slug) }}"><h3>{{ substr($post->title, 0, 24) }}</h3></a>
                     </div>
                   </div>
                 </div>

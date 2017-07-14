@@ -11,15 +11,14 @@
                 @foreach($subcategories as $subcategory)
                 <div class="col-md-3">
                 <div class="thumbnail">
-                    <img src="{{ asset('uploads/category/' . $subcategory->image) }}" alt="" class="img-responsive">
+                    <img src="{{ asset('uploads/category/thumbnail/' . $subcategory->image) }}" alt="" class="img-responsive">
                     <div class="caption">
-                        <a href="{{ route('subcategory', $subcategory->slug) }}"><h3>{{ $subcategory->name }}</h3></a>
+                        <a href="{{ route('subcategory', $subcategory->slug) }}"><h3>{{ substr($subcategory->name, 0, 20) }}</h3></a>
                         <p>{!! substr(strip_tags($subcategory->description), 0, 300) !!}</p>
                     </div>
                   </div>
                 </div>
               @endforeach
-
          </div>
         </div>
    </div>
