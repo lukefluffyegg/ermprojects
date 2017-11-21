@@ -16,6 +16,8 @@
    <div class="container">
   <div class="col-md-12">
         <h2>{{ $page->name }}</h2>
+
+          <br>
         
          <div class="main-content"> 
           

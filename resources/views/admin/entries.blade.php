@@ -39,9 +39,9 @@
                 </tr>
 
              @endforeach
-
               </tbody>
             </table>
+              {{ $testentries->render() }}
           </div>
           @endif
         </div>

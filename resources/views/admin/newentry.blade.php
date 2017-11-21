@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+<script>  var baseUrl = "{{ asset('uploads/') }}"; </script>﻿
 
 <div class="container-fluid">
       <div class="row">
@@ -30,7 +31,7 @@
                     <select id="subcategory" class="form-control" name="subcategory">
                         <option>Select a subcategory</option>
                         @foreach($subcategories as $subcategory)
-                          <option value="{{ $subcategory->id }}">{{ $subcategory->parent->name }} > {{ $subcategory->name }}</option>
+                          <option value="{{ $subcategory->id }}">@if($subcategory->name !== 'Press') {{ $subcategory->parent->name }} >  @endif {{ $subcategory->name }}</option>
                         @endforeach
                     </select>
 
@@ -98,7 +99,6 @@
                 <div class="col-md-7">
 
                     <select id="tags" class="form-control select2-multi" name="tags[]" multiple="multiple">
-                        <option>Select a Tag</option>
                         @foreach($tags as $tag)
                           <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                         @endforeach

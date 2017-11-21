@@ -15,7 +15,7 @@
         } else {
         print 'javascript:window.history.back()';
         };
-        ?>" class="btn btn-sm btn-success post-entry-back">&lt; back to category</a>
+        ?>" class="btn btn-sm btn-success post-entry-back">&lt; back</a>
 
         </div>
           
@@ -23,20 +23,27 @@
 
           <h1 class="entry-title">{{ $entry->title }}</h1>
 
+        <div class="tags">
+            @foreach($entry->tags as $tag)
+                <a href="{{ route('tags.show', $tag->id) }}"><span class="label label-default tags">{{ $tag->name }}</span></a>
+            @endforeach
+        </div>
+
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">{{ $entry->subCategory->name }}</a></li>
         <li class="breadcrumb-item active">{{ $entry->title }}</li>
     </ol>
 
+
         
-
-        {!! $entry->description !!}
-
+       <div class="entry-content"> 
+          {!! $entry->description !!}
+      </div>
         <hr>
 
         <div class="tags">
             @foreach($entry->tags as $tag)
-                <a href="{{ route('tags.show', $tag->id) }}"><span class="label label-default">{{ $tag->name }}</span></a>
+                <a href="{{ route('tags.show', $tag->id) }}"><span class="label label-default tags">{{ $tag->name }}</span></a>
             @endforeach
         </div>
 
@@ -57,7 +64,7 @@
             <div class="row">
                 @foreach($photos as $photo)
                     <div class="col-md-4">
-                    <a href="{{ asset('uploads/posts/' . $photo->image) }}" data-featherlight="image">
+                    <a href="{{ asset('uploads/posts/' . $photo->image) }}" class="allery" data-fancybox="gallery" data-caption="{{ $photo->name }} <br> {{ $photo->description }}">
                         <img src="{{ asset('uploads/posts/thumbnail/' . $photo->image) }}"  alt="" style="width: 100%; height: auto; margin-bottom: 1em; margin-top: 1em;">
                     </a>
                     </div>
@@ -67,8 +74,10 @@
                      @endphp
                 @endforeach
 
-            @if($photoscount < 1) 
-            There are no additional photos
+            @if($photoscount < 1)
+            <div class="col-md-6">
+                <!-- Could put a message saying no photos !-->
+            </div>
             @endif
             </div>
 
@@ -79,7 +88,9 @@
             </div>
 
             @else
-                <p>No Vimeo Video</p>
+                <div class="col-md-6">
+                <!-- Could put a message saying no vid !-->
+                </div>
             @endif
 
 

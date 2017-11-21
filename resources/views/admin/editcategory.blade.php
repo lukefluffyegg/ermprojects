@@ -70,6 +70,7 @@
             <div class="col-md-7">
 
                 <select id="category" multiple class="form-control" id="sel2" name="category">
+                <option value="">None</option>
                     @foreach($categories as $parent)
                       <option value="{{ $parent->id }}"  <?php if($category->parent_id == $parent->id) { echo 'selected="selected"'; } ?>>
                           {{ $parent->name }}

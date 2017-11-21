@@ -9,15 +9,27 @@
 @endsection
 
 @section('content')
+<script>  var baseUrl = "{{ asset('uploads/') }}"; </script>﻿
 
 <div class="container-fluid">
       <div class="row">
        <!-- include nav !-->
        @include('admin.partials.nav')
         <div class="col-md-12">
+                <div class="col-md-9 col-md-offset-3">
+
+                <h2>Editing Post: <a href="{{ route('postentry', $post->slug) }}">{{ $post->title }}</a></h2>
+
+                </div>
+
+                <br><br><br>
 
                 <div class="panel-body">
-                    <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="{{ route('post.edit', $post->id) }}">
+
+    
+
+
+         <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="{{ route('post.edit', $post->id) }}">
                         {{ csrf_field() }}
 
 
@@ -95,7 +107,6 @@
                 <div class="col-md-7">
 
                     <select id="tags" class="form-control select2-multi" name="tags[]" multiple="multiple">
-                        <option>Select a Tag</option>
                         @foreach($tags as $tag)
                           <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                         @endforeach
@@ -116,7 +127,7 @@
 
             <div class="col-md-7">
                 <input type="file" name="image"  id="inputImage">
-                <img style="display:none; width:250px;" id="mainImage" src="" alt="your image" />
+                <img src="{{ asset('uploads/posts/thumbnail/' . $post->image) }}" style="width:250px;" id="mainImage"  alt="your image" />
                 @if ($errors->has('image'))
                     <span class="help-block">
                         <strong>{{ $errors->first('image') }}</strong>
@@ -156,10 +167,11 @@
             <div id="gallery-images">
                 <ul class="sortable">
                 @foreach($postgallery as $photo)
-                    <li id="item_{{ $photo->id }}">
+                    <li id="item_{{ $photo->id }} ">
                         <a onclick="return confirm('Are you sure you want to delete this gallery Image?');" href="{{ route('delete.gallery.image', $photo->id) }}" class="delete-gallery-image"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        <img src="{{ asset('uploads/posts/' . $photo->image) }}" alt="">
+                        <img src="{{ asset('uploads/posts/' . $photo->image) }}" alt="" data-toggle="modal" data-target="#exampleModal" data-whatever="{{ $photo->id }}">
                     </li>
+
                 @endforeach
                 </ul>
             </div>
@@ -177,6 +189,32 @@
     </div>
 </div>
 
+
+
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Edit Image</h4>
+      </div>
+      <div class="modal-body">
+         <form role="form" method="POST" action="{{ route('photo.edit') }}">
+             {{ csrf_field() }}
+            <div id="inner-photo-form"></div>
+            <input type="submit" style="display:none;" class="submit-photo-edit">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="save-photo-edit">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 @section('js')
 
     <script src="{{ URL::asset('js/select2.min.js') }}"></script>
@@ -185,7 +223,6 @@
         $(".select2-multi").select2();
         $(".select2-multi").select2().val({!! $post->tags()->allRelatedIds() !!}).trigger('change');
     </script>
-
 
 @endsection
 

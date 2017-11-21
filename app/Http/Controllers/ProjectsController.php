@@ -12,7 +12,7 @@ use App\Tag;
 class ProjectsController extends Controller
 {
     public function index(Category $category) {
-        $categories = $category->where('parent_id', '=', null)->get();
+        $categories = $category->where('parent_id', '=', null)->where('id', '!=', '11')->get();
 
         return view('projects.index')->with('categories', $categories);
     }
@@ -23,7 +23,7 @@ class ProjectsController extends Controller
 
         $subcategories = Category::where('parent_id', '=', $categories->id)->get();
 
-        return view('projects.subcategories')->with('subcategories', $subcategories);
+        return view('projects.subcategories')->with('subcategories', $subcategories)->with('categories', $categories);
     }
 
     public function subcategory(Category $category, $slug) {

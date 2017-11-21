@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pages;
+use App\Posts;
 
 class PagesController extends Controller
 {
@@ -21,7 +22,8 @@ class PagesController extends Controller
         return $pages;
     }
 
-    public function pressPage() {
-        return view('genreal.press');
+    public function pressPage(Posts $post) {
+        $posts = $post->where('sub_cat_id', '=', '12')->get();
+        return view('genreal.press')->with('posts', $posts);
     }
 }

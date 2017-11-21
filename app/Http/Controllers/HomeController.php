@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Posts;
+use App\Pages;
 
 class HomeController extends Controller
 {
@@ -22,10 +23,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Posts $posts)
+    public function index(Posts $posts, Pages $pages)
     {
-        $posts = $posts->take(4)->get();
-        return view('home')->with('posts', $posts);
+        $posts = $posts->orderBy('updated_at', 'DESC')->take(4)->get();
+        
+        $content = $pages->where('slug', '=', 'home')->first();
+
+        return view('home')->with('posts', $posts)->with('content', $content);
     }
 
 }

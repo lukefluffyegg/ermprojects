@@ -22,7 +22,7 @@ class AdminController extends Controller
     }
 
     public function entries(Request $request, Posts $posts) {
-        $testentries = $posts->get();
+        $testentries = $posts->paginate(10);
 
         return view('admin.entries')->with('testentries', $testentries);
     }
@@ -303,7 +303,7 @@ class AdminController extends Controller
     }
 
     public function categories(Category $category) {
-        $categories = $category->get();
+        $categories = $category->where('id', '!=', '11')->where('id', '!=', '12')->get();
 
         return view('admin.categories')->with('categories', $categories);
     }
@@ -319,7 +319,6 @@ class AdminController extends Controller
      $this->validate($request, array( 
         'name' => 'required|max:255',
         'slug' => "unique:posts,slug",
-        'image' => 'required',
     ));
 
     $category = new Category;
@@ -489,6 +488,31 @@ class AdminController extends Controller
 
         return redirect()->back()->with('info', 'Page Updated');
 
+    }
+
+
+    public function photoEdit(Request $request, PostsGallery $postsGallery) {
+
+        $this->validate($request, array(
+            'name' => 'min:3|max:255',
+        ));
+
+        $name = $request->name;
+        $description  = $request->description;
+        $photoId = $request->photogalleryid;
+
+        //$query = $postsGallery->where('id', $photoId)->update(['name' => $name]);
+
+        $photoEdit = PostsGallery::find($photoId);
+       
+        $photoEdit->update([
+            'name' => $name,
+            'description' => $description,
+        ]);
+
+
+
+        return redirect()->back()->with('info', 'Photo Updated');
     }
 
 
